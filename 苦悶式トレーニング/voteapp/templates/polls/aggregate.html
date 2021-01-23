@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class = "mb-5 text-center">集計</h1>
+
+<table class="table">
+<!-- 表形式にする -->
+  <thead class = "thead-dark">
+    <tr>
+      <th scope = "col">質問</th>
+      <th scope = "col">最も投票数の多かった選択肢</th>
+      <th scope = "col">票数</th>
+    </tr>
+  </thead>
+  <!-- 質問の数だけFor文を繰り返す　-->
+  <!-- 同じ票数の場合では先の選択肢が優先される　-->
+  {% for question_dic in aggregate_list %}
+  <tbody>
+  <tr>
+      <th>{{ question_dic.question.question_text }}</th>
+      <th>{{ question_dic.max_voted_choice.choice_text }}</th>
+      <th>{{ question_dic.max_voted_choice.votes }}票</th>
+  </tr>
+  {% endfor %}
+  <tr><th></th><th>総合票数</th><th>{{ all_votes }}</th></tr>
+  </tbody>
+</table>
+
+<a class = "btn btn-secondary" href = "{% url 'polls:index' %}">投票画面に戻る</a>
+{% endblock %}

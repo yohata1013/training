@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="class text-center mb-3">質問</h1>
+  {% if question_list %}
+    {% for question in question_list %}
+      <div class="card mb-3">
+        <div class="crd-body">
+            <p class = "lead">{{ question.question_text }}</p>
+            <a href = "{% url 'polls:detail' question.id %}" class="btn-primary btn-sm">投票する</a>
+            <a href = "{% url 'polls:results' question.id %}" class="btn-primary btn-sm">結果だけ見る</a>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>質問項目はありません</p>
+  {% endif %}
+
+{% endblock %}
